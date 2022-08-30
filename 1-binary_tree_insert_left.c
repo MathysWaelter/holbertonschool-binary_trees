@@ -10,16 +10,18 @@
 
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
-	binary_tree_t *left_tree = malloc(sizeof(*left_tree));
+	binary_tree_t *left_tree;
+
+	if (parent == NULL)
+		return (NULL);
+
+	left_tree = malloc(sizeof(*left_tree));
 
 	if (left_tree == NULL)
 	{
 		fprintf(stderr, "Error Malloc\n");
 		exit(EXIT_FAILURE);
 	}
-
-	if (parent == NULL)
-		return (NULL);
 
 	left_tree->n = value;
 	left_tree->left = NULL;
