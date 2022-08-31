@@ -1,15 +1,21 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_preorder - function 
- * @free: tree
+ * binary_tree_preorder - function
+ * @tree: tree
  * @func: pointer of function
  */
 
 void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int))
 {
-	if (tree->right == NULL && tree->left == NULL)
+	if (tree == NULL || func == NULL)
 		return;
+
+	if (tree->right == NULL && tree->left == NULL)
+	{
+		_func(tree->n);
+		return;
+	}
 
 	func = _func;
 
