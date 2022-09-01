@@ -86,6 +86,68 @@ int binary_tree_is_full(const binary_tree_t *tree)
 }
 
 /**
+ * binary_tree_depth - measure the depth of binary tree
+ * @tree: binary tree
+ * Return: the depth
+ */
+
+size_t binary_tree_depth(const binary_tree_t *tree)
+{
+	size_t l = 0;
+
+	if (tree == NULL)
+		return (0);
+
+	if (tree->parent)
+	{
+		l = binary_tree_depth(tree->parent);
+		l++;
+	}
+
+	return (l);
+
+}
+
+
+/**
+ * binary_tree_size - measures the size of tree
+ * @tree: binary tree
+ * Return: Size
+ */
+
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+	size_t size = 1;
+
+	if (tree == NULL)
+		return (0);
+
+	size += binary_tree_size(tree->left);
+	size += binary_tree_size(tree->right);
+
+	return (size);
+}
+
+/**
+ * _pow_recursion - recursion
+ * @x: x
+ * @y: y
+ *
+ * Return: integer
+ */
+
+size_t _pow_recursion(int x, int y)
+{
+if (y < 0)
+	return (-1);
+if (x == 1 || y == 0)
+	return (1);
+if (x == 0)
+	return (0);
+return (x * _pow_recursion(x, (y - 1)));
+}
+
+/**
  * binary_tree_is_perfect - check if tree is full and balanced
  * @tree: tree
  * 
@@ -97,7 +159,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	if (binary_tree_is_full(tree) && !binary_tree_balance(tree))
+	if (binary_tree_is_full(tree) && !binary_tree_balance(tree) && binary_tree_size(tree) == _pow_recursion(2, binary_tree_height(tree) - 1))
 		{
 			return (1);
 		}
