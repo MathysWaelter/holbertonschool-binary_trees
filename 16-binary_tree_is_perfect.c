@@ -136,15 +136,13 @@ size_t binary_tree_size(const binary_tree_t *tree)
  * Return: integer
  */
 
-size_t _pow_recursion(int x, int y)
+size_t two_pow_recursion(int y)
 {
 if (y < 0)
 	return (-1);
-if (x == 1 || y == 0)
+if (y == 0)
 	return (1);
-if (x == 0)
-	return (0);
-return (x * _pow_recursion(x, (y - 1)));
+return (2 * two_pow_recursion(y - 1));
 }
 
 /**
@@ -158,8 +156,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	if (tree == NULL)
 		return (0);
-
-	if (binary_tree_is_full(tree) && !binary_tree_balance(tree) && binary_tree_size(tree) == _pow_recursion(2, binary_tree_height(tree) - 1))
+	if (binary_tree_is_full(tree) && !binary_tree_balance(tree) && binary_tree_size(tree) == (two_pow_recursion((binary_tree_height(tree) + 1))) - 1)
 		{
 			return (1);
 		}
